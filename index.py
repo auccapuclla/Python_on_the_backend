@@ -6,6 +6,12 @@ class basicRequestHandler(tornado.web.RequestHandler):
         self.write("Hello, World this is a python command executed from the backend.")
 
 
+class resourceParameRequestHandler(tornado.web.RequestHandler):
+    def get(self, studentName, courseId):
+        print(studentName)
+        self.write(f"Welcome {studentName} the course you are viewing is {courseId}")
+
+
 class queryParamRequestHandler(tornado.web.RequestHandler):
     def get(self):
        num = self.get_argument("num")
@@ -21,9 +27,13 @@ class listRequestHandler(tornado.web.RequestHandler):
 
 if __name__ == "__main__":
     app = tornado.web.Application([
+        #lis of all endpoint
         (r"/", basicRequestHandler), #r Rest point
         (r"/animal", listRequestHandler),
-        (r"/isEven", queryParamRequestHandler) #to query we need to use route "/isEven?num=4"
+        (r"/isEven", queryParamRequestHandler), #to query we need to use route "/isEven?num=4"
+        (r"/students/([a-z]+)/([0-9])+", resourceParameRequestHandler),
+        #"[a-z]+" capture more than 1 letter #"[0-9]+" capture numbers
+        #the above only capture lower case words
     ])
     
     port = 8882
