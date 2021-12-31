@@ -31,7 +31,7 @@ if __name__ == "__main__":
         (r"/", basicRequestHandler), #r Rest point
         (r"/animal", listRequestHandler),
         (r"/isEven", queryParamRequestHandler), #to query we need to use route "/isEven?num=4"
-        (r"/students/([a-z]+)/([0-9])+", resourceParameRequestHandler),
+        (r"/students/([A-Z]+[a-z]+)/([0-9])+", resourceParameRequestHandler),
         #"[a-z]+" capture more than 1 letter #"[0-9]+" capture numbers
         #the above only capture lower case words
     ])
